@@ -1,6 +1,6 @@
 using System;
 using System.IO;
-using Zlib;
+using System.IO.Compression;
 
 if (args.Length < 1)
 {
