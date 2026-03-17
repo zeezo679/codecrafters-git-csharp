@@ -21,7 +21,7 @@ if (command == "init")
 }
 else if (command == "cat-file")
 {
-    using FileStream fs = new FileStream($".git/objects/{args[2][..2]}/{args[2][..2]}", FileMode.Open, FileAccess.Read);
+    using FileStream fs = new FileStream($".git/objects/{args[2][..2]}/{args[2][2..]}", FileMode.Open, FileAccess.Read);
     
     using ZLibStream zlibStream = new ZLibStream(fs, CompressionMode.Decompress);
     
