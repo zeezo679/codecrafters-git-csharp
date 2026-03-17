@@ -27,7 +27,7 @@ else if (command == "cat-file")
     
     using StreamReader reader = new StreamReader(zlibStream);
 
-    Console.WriteLine(reader.ReadToEnd().Split('\x00')[1]);
+    Console.Write(reader.ReadToEnd().Split('\x00')[1]);
 }
 else
 {
