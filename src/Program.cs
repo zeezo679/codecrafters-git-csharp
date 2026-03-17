@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using Zlib;
 
 if (args.Length < 1)
 {
@@ -17,6 +18,16 @@ if (command == "init")
     Directory.CreateDirectory(".git/refs");
     File.WriteAllText(".git/HEAD", "ref: refs/heads/main\n");
     Console.WriteLine("Initialized git directory");
+}
+else if (command == "cat-file")
+{
+    using FileStream fs = new FileStream(".git/objects/{args[2][..2]}/{args[2][..2]}", FileMode.Open, FileAccess.Read);
+    
+    using ZLibStream zlibStream = new ZLibStream(fs, Zlib.CompressionMode.Decompress);
+    
+    using StreamReader reader = new StreamReader(zlibStream);
+
+    Console.WriteLine(reader.ReadToEnd().Split('\x00')[1]);
 }
 else
 {
